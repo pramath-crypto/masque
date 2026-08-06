@@ -784,9 +784,10 @@ function startGame(){
 function checkWinCondition(){
   const alive = state.players.filter(p=>p.alive);
   const civAlive = alive.filter(p=>p.role==='civilian').length;
-  const infAlive = alive.filter(p=>p.role!=='civilian').length;
-  if(infAlive === 0) return 'civilians';
-  if(infAlive >= civAlive) return 'infiltrators';
+  const mrwhite = alive.filter(p=>p.role==='mrwhite').length;
+  const undercover = alive.filter(p=>p.role!=='civilian').length - mrwhite;
+  if(undercover== 0) return 'civilians';
+  if(undercover > civAlive) return 'infiltrators';
   return null;
 }
 
